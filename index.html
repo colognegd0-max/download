@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Downloads</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background: #0f0f0f;
+    color: white;
+    text-align: center;
+    padding: 40px;
+}
+
+h1 {
+    font-size: 40px;
+}
+
+.file {
+    margin: 20px;
+    padding: 15px;
+    background: #1a1a1a;
+    border-radius: 10px;
+}
+
+a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    background: #4CAF50;
+    color: white;
+    cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Downloads</h1>
+
+<div class="file">
+    <p>file.txt</p>
+    <a href="file.txt" download>Download</a><br>
+    <button onclick="copyCmd('file.txt')">Copy PowerShell Command</button>
+</div>
+
+<script>
+function copyCmd(file) {
+    const url = window.location.origin + window.location.pathname + file;
+    const cmd = `iwr "${url}" -OutFile "${file}"`;
+
+    navigator.clipboard.writeText(cmd);
+    alert("Copied!");
+}
+</script>
+
+</body>
+</html>
