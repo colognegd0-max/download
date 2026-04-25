@@ -18,10 +18,11 @@ h1 {
 }
 
 .file {
-    margin: 20px;
+    margin: 20px auto;
     padding: 15px;
     background: #1a1a1a;
     border-radius: 10px;
+    width: 300px;
 }
 
 a {
@@ -46,16 +47,25 @@ button {
 
 <h1>Downloads</h1>
 
+<!-- Cirno EXE -->
 <div class="file">
-    <p>file.txt</p>
-    <a href="file.txt" download>Download</a><br>
-    <button onclick="copyCmd('file.txt')">Copy PowerShell Command</button>
+    <p><b>Cirno</b> (downloader.exe)</p>
+    <a href="downloader.exe" download>Download</a><br>
+    <button onclick="copyCmd('downloader.exe')">Copy PowerShell Command</button>
+</div>
+
+<!-- test.txt -->
+<div class="file">
+    <p>test.txt</p>
+    <a href="test.txt" download>Download</a><br>
+    <button onclick="copyCmd('test.txt')">Copy PowerShell Command</button>
 </div>
 
 <script>
 function copyCmd(file) {
-    const url = window.location.origin + window.location.pathname + file;
-    const cmd = `iwr "${url}" -OutFile "${file}"`;
+    const base = window.location.origin + window.location.pathname;
+    const url = base.endsWith('/') ? base + file : base + '/' + file;
+    const cmd = `iwr "${url}" -OutFile "$env:USERPROFILE\\Downloads\\${file}"`;
 
     navigator.clipboard.writeText(cmd);
     alert("Copied!");
